@@ -8,10 +8,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".StraightRazorDatabaseActivity" >
 
-    <TextView
-        android:id="@+id/label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+    <ListView android:layout_width="fill_parent"
+		android:layout_height="fill_parent" android:id="@+id/allManufacturers" 
+		android:paddingLeft="5dp" android:paddingRight="5dp"/>
 
 </RelativeLayout>
