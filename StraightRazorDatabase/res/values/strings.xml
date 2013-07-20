@@ -4,5 +4,7 @@
     <string name="app_name">Straight Razor Database</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="waitForManufacturers">Please wait while we download the list of razor manufacturers.</string>
+    <string name="noManufacturersFound">No data found, straightrazorplace.com may be offline.  Please try again later.</string>
 
 </resources>
