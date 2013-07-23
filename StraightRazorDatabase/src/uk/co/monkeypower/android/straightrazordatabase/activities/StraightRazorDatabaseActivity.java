@@ -3,6 +3,8 @@ package uk.co.monkeypower.android.straightrazordatabase.activities;
 import java.util.List;
 
 import uk.co.monkeypower.android.straightrazordatabase.R;
+import uk.co.monkeypower.android.straightrazordatabase.StraightRazorDatabaseApplication;
+import uk.co.monkeypower.android.straightrazordatabase.adapter.StraightRazorItemAdapter;
 import uk.co.redfruit.libraries.srpDB.SRPDBClient;
 import uk.co.redfruit.libraries.srpDB.data.Manufacturer;
 import uk.co.redfruit.libraries.srpDB.exceptions.SRBClientException;
@@ -13,6 +15,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.util.Log;
 import android.view.Menu;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -67,8 +70,10 @@ public class StraightRazorDatabaseActivity extends Activity {
 		@Override
 		public void run() {
 			setContentView(R.layout.activity_straight_razor_database);
-			TextView text = (TextView) findViewById(R.id.label);
-			text.setText(manufacturers.get(0).getTitle());
+			StraightRazorItemAdapter itemAdapter = new StraightRazorItemAdapter(
+					getApplicationContext(), R.layout.item_list, manufacturers);
+			ListView manufacturersView = (ListView) findViewById(R.id.allManufacturers);
+			manufacturersView.setAdapter(itemAdapter);
 			if (progressDialog != null) {
 				progressDialog.dismiss();
 			}
