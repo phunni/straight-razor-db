@@ -9,15 +9,18 @@ import uk.co.redfruit.libraries.srpDB.data.Manufacturer;
 import uk.co.redfruit.libraries.srpDB.exceptions.SRBClientException;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
-import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class StraightRazorDatabaseActivity extends Activity {
+public class StraightRazorDatabaseActivity extends Activity implements OnItemClickListener {
 	
 	private List<Manufacturer> manufacturers;
 	private ProgressDialog progressDialog;
@@ -36,12 +39,13 @@ public class StraightRazorDatabaseActivity extends Activity {
 			
 		//}
 	}
-
+	
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		//Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.straight_razor_database, menu);
-		return true;
+	public void onItemClick(AdapterView<?> arg0, View arg1, int position, long id) {
+		Manufacturer manufacturer = manufacturers.get(position);
+		Intent intent = new Intent(this, DisplayItemsActivity.class);
+		intent.putExtra("manufacturer", manufacturer);
+		startActivity(intent);
 	}
 	
 	private class DownloadManufacturers implements Runnable {
@@ -72,11 +76,13 @@ public class StraightRazorDatabaseActivity extends Activity {
 					getApplicationContext(), R.layout.item_list, manufacturers);
 			ListView manufacturersView = (ListView) findViewById(R.id.allManufacturers);
 			manufacturersView.setAdapter(itemAdapter);
+			manufacturersView.setOnItemClickListener(StraightRazorDatabaseActivity.this);
 			if (progressDialog != null) {
 				progressDialog.dismiss();
 			}
 		}
 		
 	}
+
 
 }

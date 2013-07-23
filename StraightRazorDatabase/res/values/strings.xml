@@ -6,5 +6,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="waitForManufacturers">Please wait while we download the list of razor manufacturers.</string>
     <string name="noManufacturersFound">No data found, straightrazorplace.com may be offline.  Please try again later.</string>
+    <string name="title_activity_display_items">DisplayItemsActivity</string>
+    <string name="waitForItems">Please wait while we download items from this Manufacturer.</string>
 
 </resources>
