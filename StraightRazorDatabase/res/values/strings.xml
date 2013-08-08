@@ -8,5 +8,7 @@
     <string name="noManufacturersFound">No data found, straightrazorplace.com may be offline.  Please try again later.</string>
     <string name="title_activity_display_items">DisplayItemsActivity</string>
     <string name="waitForItems">Please wait while we download items from this Manufacturer.</string>
+    <string name="waitForContent">Please wait while we access this content.</string>
+    <string name="title_activity_display_content">DisplayContentActivity</string>
 
 </resources>

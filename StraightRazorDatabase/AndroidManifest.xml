@@ -30,6 +30,10 @@
             android:name="uk.co.monkeypower.android.straightrazordatabase.activities.DisplayItemsActivity"
             android:label="@string/title_activity_display_items" >
         </activity>
+        <activity
+            android:name="uk.co.monkeypower.android.straightrazordatabase.activities.DisplayContentActivity"
+            android:label="@string/title_activity_display_content" >
+        </activity>
     </application>
 
 </manifest>
