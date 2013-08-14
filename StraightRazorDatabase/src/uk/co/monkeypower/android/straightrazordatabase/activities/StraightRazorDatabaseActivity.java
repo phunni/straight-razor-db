@@ -30,14 +30,15 @@ public class StraightRazorDatabaseActivity extends Activity implements OnItemCli
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//if (manufacturers == null) {
+		manufacturers = (List<Manufacturer>) getLastNonConfigurationInstance();
+		if (manufacturers == null) {
 			String progressMessage = getResources().getString(R.string.waitForManufacturers);
 			progressDialog = ProgressDialog.show(this, "", progressMessage,true);
 			Thread downloadManufacturersThread = new Thread(new DownloadManufacturers());
 			downloadManufacturersThread.start();
-		//} else {
-			
-		//}
+		} else {
+			gotManufacturersHandler.post(new UICallbackHandler());
+		}
 	}
 	
 	@Override
@@ -48,6 +49,15 @@ public class StraightRazorDatabaseActivity extends Activity implements OnItemCli
 		startActivity(intent);
 	}
 	
+	
+	
+	@Override
+	public Object onRetainNonConfigurationInstance() {
+		return manufacturers;
+	}
+
+
+
 	private class DownloadManufacturers implements Runnable {
 
 		@Override

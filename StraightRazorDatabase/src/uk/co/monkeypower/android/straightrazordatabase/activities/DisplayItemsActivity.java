@@ -21,20 +21,31 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class DisplayItemsActivity extends Activity implements OnItemClickListener {
-	
+public class DisplayItemsActivity extends Activity implements
+		OnItemClickListener {
+
 	private List<Manufacturer> items;
 	private ProgressDialog progressDialog;
 	private Handler gotItemsHandler = new Handler(Looper.getMainLooper());
-	private final static String TAG="DisplayItemsActivity";
+	private final static String TAG = "DisplayItemsActivity";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		String progressMessage = getResources().getString(R.string.waitForItems);
-		progressDialog = ProgressDialog.show(this, "", progressMessage,true);
-		Thread downloadItems = new Thread(new DownloadItems());
-		downloadItems.start();
+		items = (List<Manufacturer>) getLastNonConfigurationInstance();
+		if (items == null) {
+			String manufacturerTitle = ((Manufacturer) getIntent().getExtras()
+					.getParcelable("manufacturer")).getTitle();
+			getActionBar().setTitle(manufacturerTitle);
+			String progressMessage = getResources().getString(
+					R.string.waitForItems);
+			progressDialog = ProgressDialog.show(this, "", progressMessage,
+					true);
+			Thread downloadItems = new Thread(new DownloadItems());
+			downloadItems.start();
+		} else {
+			gotItemsHandler.post(new UICallbackHandler());
+		}
 	}
 
 	@Override
@@ -43,34 +54,41 @@ public class DisplayItemsActivity extends Activity implements OnItemClickListene
 		getMenuInflater().inflate(R.menu.display_items, menu);
 		return true;
 	}
-	
+
 	@Override
-	public void onItemClick(AdapterView<?> arg0, View arg1, int position, long id) {
+	public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+			long id) {
 		Manufacturer selectedItem = items.get(position);
 		Intent intent = new Intent(this, DisplayContentActivity.class);
-		intent.putExtra("pageID", selectedItem.getPageID());
+		intent.putExtra("item", selectedItem);
 		startActivity(intent);
 	}
-	
+
+	@Override
+	public Object onRetainNonConfigurationInstance() {
+		return items;
+	}
+
 	private class DownloadItems implements Runnable {
 
 		@Override
 		public void run() {
-			Manufacturer manufacturer = getIntent().getExtras().getParcelable("manufacturer");
+			Manufacturer manufacturer = getIntent().getExtras().getParcelable(
+					"manufacturer");
 			try {
-				items = new SRPDBClient().getManufacturers(manufacturer.getTitle());
+				items = new SRPDBClient().getManufacturers(manufacturer
+						.getTitle());
 			} catch (SRBClientException e) {
-				Toast toast = Toast.makeText(
-						DisplayItemsActivity.this,
+				Toast toast = Toast.makeText(DisplayItemsActivity.this,
 						R.string.noManufacturersFound, Toast.LENGTH_LONG);
 				toast.show();
 				Log.e(TAG, "Failed to get manufacturer data.", e);
 			}
 			gotItemsHandler.post(new UICallbackHandler());
 		}
-		
+
 	}
-	
+
 	private class UICallbackHandler implements Runnable {
 
 		@Override
@@ -85,7 +103,7 @@ public class DisplayItemsActivity extends Activity implements OnItemClickListene
 				progressDialog.dismiss();
 			}
 		}
-		
+
 	}
 
 }
