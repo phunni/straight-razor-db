@@ -12,6 +12,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.view.Menu;
 import android.webkit.WebSettings;
+import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
@@ -87,8 +88,7 @@ public class DisplayContentActivity extends Activity {
 			final WebView contentView = (WebView) findViewById(R.id.contentView);
 			WebSettings settings = contentView.getSettings();
 			settings.setSupportZoom(true);
-			// settings.setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);
-			// settings.setJavaScriptEnabled(false);
+			settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
 			contentView.setWebViewClient(new WebViewClient() {
 				@Override
 				public boolean shouldOverrideUrlLoading(WebView view, String url) {
