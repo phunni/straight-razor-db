@@ -1,15 +1,11 @@
 package uk.co.monkeypower.android.straightrazordatabase.test;
 
-import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertTrue;
-
 import java.util.List;
-
-import android.test.AndroidTestCase;
 
 import uk.co.redfruit.libraries.srpDB.SRPDBClient;
 import uk.co.redfruit.libraries.srpDB.data.Manufacturer;
 import uk.co.redfruit.libraries.srpDB.exceptions.SRBClientException;
+import android.test.AndroidTestCase;
 
 /**
  * User: paul
