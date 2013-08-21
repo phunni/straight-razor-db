@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import uk.co.redfruit.libraries.srpDB.data.Manufacturer;
 import uk.co.redfruit.libraries.srpDB.exceptions.SRBClientException;
+import uk.co.redfruit.libraries.srpDB.utils.ContentCleaner;
 
 import com.turbomanage.httpclient.HttpResponse;
 import com.turbomanage.httpclient.android.AndroidHttpClient;
@@ -28,6 +29,7 @@ public class SRPDBClient {
 	public List<Manufacturer> getManufacturers() throws SRBClientException {
 		return getManufacturersFromJSON(MANUFACTURER_URL);
 	}
+
 
 	public List<Manufacturer> getManufacturers(String title) throws SRBClientException {
 		String sanitzedTitle = sanitize(title);
@@ -84,7 +86,6 @@ public class SRPDBClient {
 		AndroidHttpClient httpClient = new AndroidHttpClient();
 		httpClient.addHeader("User-Agent", USER_AGENT);
 		HttpResponse response = httpClient.get(contentURL, null);
-		String content = response.getBodyAsString();
-		return content;
+		return ContentCleaner.cleanContent(response.getBodyAsString());
 	}
 }
