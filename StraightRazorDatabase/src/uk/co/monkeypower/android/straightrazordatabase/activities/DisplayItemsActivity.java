@@ -7,14 +7,17 @@ import uk.co.monkeypower.android.straightrazordatabase.adapter.StraightRazorItem
 import uk.co.redfruit.libraries.srpDB.SRPDBClient;
 import uk.co.redfruit.libraries.srpDB.data.Manufacturer;
 import uk.co.redfruit.libraries.srpDB.exceptions.SRBClientException;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -29,9 +32,11 @@ public class DisplayItemsActivity extends Activity implements
 	private Handler gotItemsHandler = new Handler(Looper.getMainLooper());
 	private final static String TAG = "DisplayItemsActivity";
 
+	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 		items = (List<Manufacturer>) getLastNonConfigurationInstance();
 		if (items == null) {
 			String manufacturerTitle = ((Manufacturer) getIntent().getExtras()
@@ -67,6 +72,16 @@ public class DisplayItemsActivity extends Activity implements
 	@Override
 	public Object onRetainNonConfigurationInstance() {
 		return items;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {		
+		case android.R.id.home:
+			NavUtils.navigateUpFromSameTask(this);
+			return true;	
+		}
+		return super.onOptionsItemSelected(item);
 	}
 
 	private class DownloadItems implements Runnable {

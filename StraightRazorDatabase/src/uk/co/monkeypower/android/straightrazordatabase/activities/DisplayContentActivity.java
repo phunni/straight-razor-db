@@ -4,15 +4,17 @@ import uk.co.monkeypower.android.straightrazordatabase.R;
 import uk.co.redfruit.libraries.srpDB.SRPDBClient;
 import uk.co.redfruit.libraries.srpDB.data.Manufacturer;
 import uk.co.redfruit.libraries.srpDB.exceptions.SRBClientException;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.webkit.WebSettings;
-import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
@@ -26,9 +28,11 @@ public class DisplayContentActivity extends Activity {
 
 	private String TAG = "DisplayContentActivity";
 
+	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 		content = (String) getLastNonConfigurationInstance();
 		if (content == null) {
 			String razorTitle = ((Manufacturer) getIntent().getParcelableExtra(
@@ -56,6 +60,16 @@ public class DisplayContentActivity extends Activity {
 	public Object onRetainNonConfigurationInstance() {
 		return content;
 	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {		
+		case android.R.id.home:
+			NavUtils.navigateUpFromSameTask(this);
+			return true;	
+		}
+		return super.onOptionsItemSelected(item);
+	}
 
 	private class DownloadContent implements Runnable {
 
@@ -64,10 +78,7 @@ public class DisplayContentActivity extends Activity {
 			int pageID = ((Manufacturer) getIntent().getParcelableExtra("item"))
 					.getPageID();
 			try {
-				int displayWidth = getWindowManager().getDefaultDisplay()
-						.getWidth();
 				SRPDBClient contentClient = new SRPDBClient();
-				contentClient.setDisplayWidth(displayWidth);
 				content = contentClient.getContent(pageID);
 			} catch (SRBClientException e) {
 				Toast toast = Toast.makeText(DisplayContentActivity.this,
