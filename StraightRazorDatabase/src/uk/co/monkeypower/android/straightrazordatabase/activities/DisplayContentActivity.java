@@ -3,14 +3,14 @@ package uk.co.monkeypower.android.straightrazordatabase.activities;
 import uk.co.monkeypower.android.straightrazordatabase.frgaments.DisplayContentFragment;
 import uk.co.redfruit.libraries.srpDB.data.Manufacturer;
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 
-public class DisplayContentActivity extends Activity {
+public class DisplayContentActivity extends ActionBarActivity {
 
 	//private String TAG = "DisplayContentActivity";
 
@@ -20,7 +20,7 @@ public class DisplayContentActivity extends Activity {
 		super.onCreate(savedInstanceState);	
 		String razorTitle = ((Manufacturer) getIntent().getParcelableExtra("item")).getTitle();
 		getActionBar().setTitle(razorTitle);
-		FragmentManager manager = getFragmentManager();
+		FragmentManager manager = getSupportFragmentManager();
 		if (manager.findFragmentById(android.R.id.content) == null ) {
 			Fragment contentFragment = new DisplayContentFragment();
 			manager.beginTransaction().add(android.R.id.content, contentFragment).commit();

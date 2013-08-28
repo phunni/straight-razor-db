@@ -3,11 +3,13 @@ package uk.co.monkeypower.android.straightrazordatabase.activities;
 import uk.co.monkeypower.android.straightrazordatabase.frgaments.DisplayItemsFragment;
 import uk.co.redfruit.libraries.srpDB.data.Manufacturer;
 import android.annotation.SuppressLint;
-import android.app.FragmentManager;
 import android.os.Bundle;
-import android.app.Activity;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBarActivity;
 
-public class DisplayItemsActivity extends Activity {
+public class DisplayItemsActivity extends ActionBarActivity {
 
 	//private final static String TAG = "DisplayItemsActivity";
 
@@ -18,10 +20,11 @@ public class DisplayItemsActivity extends Activity {
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		String manufacturerTitle = ((Manufacturer) getIntent().getExtras().getParcelable("manufacturer")).getTitle();
 		getActionBar().setTitle(manufacturerTitle);
-		FragmentManager manager = getFragmentManager();
+		FragmentManager manager = getSupportFragmentManager();
 		if (manager.findFragmentById(android.R.id.content) == null ) {
-			DisplayItemsFragment manufufacturersFragment = new DisplayItemsFragment();
-			manager.beginTransaction().add(android.R.id.content, manufufacturersFragment).commit();
+			Fragment manufufacturersFragment = new DisplayItemsFragment();
+			FragmentTransaction transaction = manager.beginTransaction();
+			transaction.add(android.R.id.content, manufufacturersFragment).commit();
 		}
 	}
 

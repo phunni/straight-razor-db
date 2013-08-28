@@ -8,13 +8,13 @@ import uk.co.monkeypower.android.straightrazordatabase.adapter.StraightRazorItem
 import uk.co.redfruit.libraries.srpDB.SRPDBClient;
 import uk.co.redfruit.libraries.srpDB.data.Manufacturer;
 import uk.co.redfruit.libraries.srpDB.exceptions.SRBClientException;
-import android.app.Activity;
-import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -27,7 +27,7 @@ public class DisplayItemsFragment extends Fragment implements OnItemClickListene
 	private List<Manufacturer> items;
 	private ProgressDialog progressDialog;
 	private Handler gotItemsHandler = new Handler(Looper.getMainLooper());
-	private Activity parentActivity;
+	private FragmentActivity parentActivity;
 	
 	private static final String TAG = "DisplayItemsFragment";
 	
