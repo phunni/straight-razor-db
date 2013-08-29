@@ -28,7 +28,7 @@ public class ContentCleaner {
 		return cleaned;
 	}
 
-	private static void removeImageText(TagNode node) {
+	/*private static void removeImageText(TagNode node) {
 		TagNode[] thTagsWithImageText = node.getElementsByName("th", true);
 		for (TagNode currentNode : thTagsWithImageText) {
 			String currentContent = currentNode.getText().toString().trim();
@@ -43,7 +43,7 @@ public class ContentCleaner {
 				trNode.removeFromTree();
 			}
 		}
-	}
+	}*/
 
 	private static void removeCopyForForumTable(TagNode node) {
 		TagNode[] styledTags = node.getElementsHavingAttribute("style", true);
@@ -57,6 +57,7 @@ public class ContentCleaner {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private static void removeATagsPreservingContent(TagNode node) {
 		TagNode[] aTags = node.getElementsByName("a", true);
 		for (TagNode currentNode : aTags) {
