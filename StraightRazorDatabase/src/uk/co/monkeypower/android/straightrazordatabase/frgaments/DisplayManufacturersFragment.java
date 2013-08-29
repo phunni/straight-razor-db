@@ -1,5 +1,6 @@
 package uk.co.monkeypower.android.straightrazordatabase.frgaments;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.monkeypower.android.straightrazordatabase.R;
@@ -36,8 +37,10 @@ public class DisplayManufacturersFragment extends Fragment implements OnItemClic
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setRetainInstance(true);
 		parentActivity = getActivity();
+		if (savedInstanceState != null) {
+			manufacturers = savedInstanceState.getParcelableArrayList("manufacturers");
+		}
 		if (manufacturers == null) {
 			String progressMessage = getResources().getString(R.string.waitForManufacturers);
 			progressDialog = ProgressDialog.show(parentActivity, "", progressMessage,true);
@@ -48,6 +51,14 @@ public class DisplayManufacturersFragment extends Fragment implements OnItemClic
 		}
 	}
 	
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putParcelableArrayList("manufacturers", (ArrayList<Manufacturer>)manufacturers);
+	}
+
+
+
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int position, long id) {
 		Manufacturer manufacturer = manufacturers.get(position);

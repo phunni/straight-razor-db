@@ -1,5 +1,6 @@
 package uk.co.monkeypower.android.straightrazordatabase.frgaments;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.monkeypower.android.straightrazordatabase.R;
@@ -34,7 +35,9 @@ public class DisplayItemsFragment extends Fragment implements OnItemClickListene
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		parentActivity = getActivity();
-		setRetainInstance(true);
+		if (savedInstanceState != null) {
+			items = savedInstanceState.getParcelableArrayList("items");
+		}
 		if (items == null) {
 			String progressMessage = getResources().getString(
 					R.string.waitForItems);
@@ -47,6 +50,16 @@ public class DisplayItemsFragment extends Fragment implements OnItemClickListene
 		}
 	}
 	
+	
+	
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putParcelableArrayList("items", (ArrayList<Manufacturer>)items);
+	}
+
+
+
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 			long id) {
@@ -80,12 +93,16 @@ public class DisplayItemsFragment extends Fragment implements OnItemClickListene
 
 		@Override
 		public void run() {
-			parentActivity.setContentView(R.layout.activity_display_items);
-			StraightRazorItemAdapter itemAdapter = new StraightRazorItemAdapter(parentActivity, R.layout.item_list, 
-					items);
-			ListView itemsView = (ListView) parentActivity.findViewById(R.id.allItems);
-			itemsView.setAdapter(itemAdapter);
-			itemsView.setOnItemClickListener(DisplayItemsFragment.this);
+			if (items.size() == 0) {
+				parentActivity.setContentView(R.layout.display_items_empty);
+			} else {
+				parentActivity.setContentView(R.layout.activity_display_items);
+				StraightRazorItemAdapter itemAdapter = new StraightRazorItemAdapter(parentActivity, R.layout.item_list, 
+						items);
+				ListView itemsView = (ListView) parentActivity.findViewById(R.id.allItems);
+				itemsView.setAdapter(itemAdapter);
+				itemsView.setOnItemClickListener(DisplayItemsFragment.this);
+			}
 			if (progressDialog != null) {
 				progressDialog.dismiss();
 			}

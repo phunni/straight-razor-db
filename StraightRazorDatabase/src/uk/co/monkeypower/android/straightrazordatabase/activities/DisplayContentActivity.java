@@ -20,6 +20,7 @@ public class DisplayContentActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);	
 		String razorTitle = ((Manufacturer) getIntent().getParcelableExtra("item")).getTitle();
 		getActionBar().setTitle(razorTitle);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 		FragmentManager manager = getSupportFragmentManager();
 		if (manager.findFragmentById(android.R.id.content) == null ) {
 			Fragment contentFragment = new DisplayContentFragment();

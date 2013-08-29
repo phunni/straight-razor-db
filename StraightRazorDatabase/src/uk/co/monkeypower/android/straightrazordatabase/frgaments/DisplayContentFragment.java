@@ -5,16 +5,21 @@ import uk.co.redfruit.libraries.srpDB.SRPDBClient;
 import uk.co.redfruit.libraries.srpDB.data.Manufacturer;
 import uk.co.redfruit.libraries.srpDB.exceptions.SRBClientException;
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.Toast;
+import android.view.View.OnClickListener;
 
 public class DisplayContentFragment extends Fragment {
 	
@@ -31,8 +36,10 @@ public class DisplayContentFragment extends Fragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setRetainInstance(true);
 		parentActivity = getActivity();
+		if (savedInstanceState != null) {
+			content = savedInstanceState.getString("content");
+		}
 		if (content == null) {
 			String progressMessage = getResources().getString(
 					R.string.waitForContent);
@@ -44,6 +51,16 @@ public class DisplayContentFragment extends Fragment {
 			gotItemsHandler.post(new UICallbackHandler());
 		}
 	}
+	
+	
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putString("content", content);
+	}
+
+
 
 	private class DownloadContent implements Runnable {
 
@@ -83,6 +100,16 @@ public class DisplayContentFragment extends Fragment {
 			});
 			contentView.loadDataWithBaseURL("http://straightrazorplace.com/",
 					content, "text/html", "UTF-8", null);
+			Button showInBrowserButton = (Button) parentActivity.findViewById(R.id.viewInBrowser);
+			showInBrowserButton.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					Uri uri = Uri.parse("http://www.straightrazorplace.com");
+					Intent browserIntent = new Intent(Intent.ACTION_VIEW, uri);
+					parentActivity.startActivity(browserIntent);
+				}
+			});
 			if (progressDialog != null) {
 				progressDialog.dismiss();
 			}
