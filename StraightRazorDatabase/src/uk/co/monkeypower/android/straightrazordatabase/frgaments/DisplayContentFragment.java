@@ -14,12 +14,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.Toast;
-import android.view.View.OnClickListener;
 
 public class DisplayContentFragment extends Fragment {
 	
@@ -29,7 +29,8 @@ public class DisplayContentFragment extends Fragment {
 	private ProgressDialog progressDialog;
 	private Handler gotItemsHandler = new Handler(Looper.getMainLooper());
 
-	private String TAG = "DisplayContentFragment";
+	private static final String TAG = "DisplayContentFragment";
+	private static final String BASE_URL = "http://straightrazorplace.com/";
 	
 	
 	
@@ -98,14 +99,16 @@ public class DisplayContentFragment extends Fragment {
 				}
 
 			});
-			contentView.loadDataWithBaseURL("http://straightrazorplace.com/",
+			contentView.loadDataWithBaseURL(BASE_URL,
 					content, "text/html", "UTF-8", null);
 			Button showInBrowserButton = (Button) parentActivity.findViewById(R.id.viewInBrowser);
 			showInBrowserButton.setOnClickListener(new OnClickListener() {
 				
 				@Override
 				public void onClick(View v) {
-					Uri uri = Uri.parse("http://www.straightrazorplace.com");
+					String title = ((Manufacturer)parentActivity.getIntent().getParcelableExtra("item")).getTitle();
+					String sanitizedTitle = sanitize(title);
+					Uri uri = Uri.parse(BASE_URL + "srpwiki/index.php/" + sanitizedTitle);
 					Intent browserIntent = new Intent(Intent.ACTION_VIEW, uri);
 					parentActivity.startActivity(browserIntent);
 				}
@@ -113,6 +116,11 @@ public class DisplayContentFragment extends Fragment {
 			if (progressDialog != null) {
 				progressDialog.dismiss();
 			}
+		}
+		
+		private String sanitize(String title) {
+			String sanitized = title.replace(" ", "_");
+			return sanitized;
 		}
 
 	}
