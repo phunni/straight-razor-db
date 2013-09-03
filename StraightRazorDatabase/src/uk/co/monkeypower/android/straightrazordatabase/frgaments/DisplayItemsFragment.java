@@ -16,11 +16,13 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.text.util.Linkify;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class DisplayItemsFragment extends Fragment implements OnItemClickListener{
@@ -95,6 +97,8 @@ public class DisplayItemsFragment extends Fragment implements OnItemClickListene
 		public void run() {
 			if (items.size() == 0) {
 				parentActivity.setContentView(R.layout.display_items_empty);
+				TextView noItemsText = (TextView) parentActivity.findViewById(R.id.noItemsText);
+				Linkify.addLinks(noItemsText, Linkify.WEB_URLS);
 			} else {
 				parentActivity.setContentView(R.layout.activity_display_items);
 				StraightRazorItemAdapter itemAdapter = new StraightRazorItemAdapter(parentActivity, R.layout.item_list, 

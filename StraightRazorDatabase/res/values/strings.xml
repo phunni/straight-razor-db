@@ -12,9 +12,9 @@
     <string name="title_activity_straight_razor_database">SR Manufacturers</string>
     <string name="title_about">About</string>
 	<string name="no_items">There do not appear to be any items in the Straight Razor Dataase for this item. If you believe this to be incorrect,
-	    please visit straightrazorplace.com and contact support. Alternatively, you could edit the wiki to add the missing items!</string>
+	    please visit http://www.straightrazorplace.com/ and contact support. Alternatively, you could edit the wiki to add the missing items!</string>
 	<string name="about">This app was developed by Redfruit (Paul Hunnisett). All Straight Razor Database content
-	    taken from http://www.straightrazorplace.com and the copyright is owned by straightrazorplace.com or the individual author.  Content 
+	    taken from http://www.straightrazorplace.com/ and the copyright is owned by http://www.straightrazorplace.com or the individual author.  Content 
 	    used with permission.</string>
 	<string name="browserButton">Open in Your Browser.</string>
 </resources>

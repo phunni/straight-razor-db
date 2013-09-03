@@ -23,7 +23,7 @@
             android:background="#FFFFFF" >
 
             <TextView
-                android:id="@+id/itemTitle"
+                android:id="@+id/aboutText"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
