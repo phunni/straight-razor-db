@@ -20,6 +20,7 @@
         android:id="@+id/viewInBrowser"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/browserButton" /> 
+        android:text="@string/browserButton"
+        style="@style/button" /> 
 
 </LinearLayout>
