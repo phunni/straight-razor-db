@@ -1,4 +1,4 @@
-package uk.co.monkeypower.android.straightrazordatabase.frgaments;
+package uk.co.monkeypower.android.straightrazordatabase.fragaments;
 
 import uk.co.monkeypower.android.straightrazordatabase.R;
 import uk.co.redfruit.libraries.srpDB.SRPDBClient;

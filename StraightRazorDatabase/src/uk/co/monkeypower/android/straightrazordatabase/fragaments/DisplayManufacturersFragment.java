@@ -1,4 +1,4 @@
-package uk.co.monkeypower.android.straightrazordatabase.frgaments;
+package uk.co.monkeypower.android.straightrazordatabase.fragaments;
 
 import java.util.ArrayList;
 import java.util.List;
