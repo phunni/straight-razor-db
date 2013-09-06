@@ -60,6 +60,9 @@ public class SRPDBClient {
 		AndroidHttpClient httpClient = new AndroidHttpClient();
 		httpClient.addHeader("User-Agent", USER_AGENT);
 		HttpResponse response = httpClient.get(targetURL, null);
+		if (response == null ) {
+			throw new SRBClientException("Failed to get any data back, data may not be available!");
+		}
 		String content = response.getBodyAsString();
 		List<Manufacturer> manufacturers = new ArrayList<Manufacturer>();
 		try {
@@ -86,6 +89,9 @@ public class SRPDBClient {
 		AndroidHttpClient httpClient = new AndroidHttpClient();
 		httpClient.addHeader("User-Agent", USER_AGENT);
 		HttpResponse response = httpClient.get(contentURL, null);
+		if (response == null ) {
+			throw new SRBClientException("Failed to get any data back, data may not be available!");
+		}
 		return ContentCleaner.cleanContent(response.getBodyAsString());
 	}
 }
