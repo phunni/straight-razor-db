@@ -74,12 +74,10 @@ public class DisplayManufacturersFragment extends Fragment implements OnItemClic
 			try {
 				manufacturers = new SRPDBClient().getManufacturers();
 			} catch (SRBClientException e) {
-				Toast toast = Toast.makeText(
-						parentActivity,
-						R.string.noManufacturersFound, Toast.LENGTH_LONG);
-				toast.show();
 				Log.e(TAG, "Failed to get manufacturer data.", e);
 				e.printStackTrace();
+				gotManufacturersHandler.post(new ExceptionUICallbackHandler());
+				return;
 			}
 			gotManufacturersHandler.post(new UICallbackHandler());
 		}
@@ -96,6 +94,19 @@ public class DisplayManufacturersFragment extends Fragment implements OnItemClic
 			ListView manufacturersView = (ListView) parentActivity.findViewById(R.id.allManufacturers);
 			manufacturersView.setAdapter(itemAdapter);
 			manufacturersView.setOnItemClickListener(DisplayManufacturersFragment.this);
+			if (progressDialog != null) {
+				progressDialog.dismiss();
+			}
+		}
+		
+	}
+	
+	private class ExceptionUICallbackHandler implements Runnable {
+
+		@Override
+		public void run() {
+			Toast toast = Toast.makeText(parentActivity,R.string.noManufacturersFound, Toast.LENGTH_LONG);
+			toast.show();
 			if (progressDialog != null) {
 				progressDialog.dismiss();
 			}

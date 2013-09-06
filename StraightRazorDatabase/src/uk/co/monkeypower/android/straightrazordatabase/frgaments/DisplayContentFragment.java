@@ -27,7 +27,7 @@ public class DisplayContentFragment extends Fragment {
 	private String content;
 
 	private ProgressDialog progressDialog;
-	private Handler gotItemsHandler = new Handler(Looper.getMainLooper());
+	private Handler gotContentHandler = new Handler(Looper.getMainLooper());
 
 	private static final String TAG = "DisplayContentFragment";
 	private static final String BASE_URL = "http://straightrazorplace.com/";
@@ -49,7 +49,7 @@ public class DisplayContentFragment extends Fragment {
 			Thread downloadContent = new Thread(new DownloadContent());
 			downloadContent.start();
 		} else {
-			gotItemsHandler.post(new UICallbackHandler());
+			gotContentHandler.post(new UICallbackHandler());
 		}
 	}
 	
@@ -73,12 +73,11 @@ public class DisplayContentFragment extends Fragment {
 				SRPDBClient contentClient = new SRPDBClient();
 				content = contentClient.getContent(pageID);
 			} catch (SRBClientException e) {
-				Toast toast = Toast.makeText(parentActivity,
-						R.string.noManufacturersFound, Toast.LENGTH_LONG);
-				toast.show();
 				Log.e(TAG, "Failed to get content.", e);
+				gotContentHandler.post(new ExceptionUICallbackHandler());
+				return;
 			}
-			gotItemsHandler.post(new UICallbackHandler());
+			gotContentHandler.post(new UICallbackHandler());
 		}
 
 	}
@@ -125,4 +124,16 @@ public class DisplayContentFragment extends Fragment {
 
 	}
 
+	private class ExceptionUICallbackHandler implements Runnable {
+
+		@Override
+		public void run() {
+			Toast toast = Toast.makeText(parentActivity,R.string.noManufacturersFound, Toast.LENGTH_LONG);
+			toast.show();
+			if (progressDialog != null) {
+				progressDialog.dismiss();
+			}
+		}
+		
+	}
 }

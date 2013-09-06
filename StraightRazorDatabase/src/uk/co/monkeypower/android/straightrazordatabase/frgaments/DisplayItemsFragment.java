@@ -81,10 +81,9 @@ public class DisplayItemsFragment extends Fragment implements OnItemClickListene
 				items = new SRPDBClient().getManufacturers(manufacturer
 						.getTitle());
 			} catch (SRBClientException e) {
-				Toast toast = Toast.makeText(parentActivity,
-						R.string.noManufacturersFound, Toast.LENGTH_LONG);
-				toast.show();
 				Log.e(TAG, "Failed to get manufacturer data.", e);
+				gotItemsHandler.post(new ExceptionUICallbackHandler());
+				return;
 			}
 			gotItemsHandler.post(new UICallbackHandler());
 		}
@@ -114,5 +113,17 @@ public class DisplayItemsFragment extends Fragment implements OnItemClickListene
 
 	}
 
+	private class ExceptionUICallbackHandler implements Runnable {
+
+		@Override
+		public void run() {
+			Toast toast = Toast.makeText(parentActivity,R.string.noManufacturersFound, Toast.LENGTH_LONG);
+			toast.show();
+			if (progressDialog != null) {
+				progressDialog.dismiss();
+			}
+		}
+		
+	}
 
 }
