@@ -1,7 +1,7 @@
 package uk.co.monkeypower.android.straightrazordatabase.activities;
 
 import uk.co.monkeypower.android.straightrazordatabase.R;
-import uk.co.monkeypower.android.straightrazordatabase.frgaments.DisplayManufacturersFragment;
+import uk.co.monkeypower.android.straightrazordatabase.fragaments.DisplayManufacturersFragment;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;

@@ -1,6 +1,6 @@
 package uk.co.monkeypower.android.straightrazordatabase.activities;
 
-import uk.co.monkeypower.android.straightrazordatabase.frgaments.DisplayItemsFragment;
+import uk.co.monkeypower.android.straightrazordatabase.fragaments.DisplayItemsFragment;
 import uk.co.redfruit.libraries.srpDB.data.Manufacturer;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
