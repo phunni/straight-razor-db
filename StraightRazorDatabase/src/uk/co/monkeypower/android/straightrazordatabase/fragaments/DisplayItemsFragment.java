@@ -19,13 +19,15 @@ import android.support.v4.app.FragmentActivity;
 import android.text.util.Linkify;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class DisplayItemsFragment extends Fragment implements OnItemClickListener{
+public class DisplayItemsFragment extends Fragment implements OnClickListener, OnItemClickListener{
 	
 	private List<Manufacturer> items;
 	private ProgressDialog progressDialog;
@@ -69,6 +71,14 @@ public class DisplayItemsFragment extends Fragment implements OnItemClickListene
 		Intent intent = new Intent(parentActivity, DisplayContentActivity.class);
 		intent.putExtra("item", selectedItem);
 		startActivity(intent);
+	}
+	
+	@Override
+	public void onClick(View v) {
+		String progressMessage = getResources().getString(R.string.waitForItems);
+		progressDialog = ProgressDialog.show(parentActivity, "", progressMessage,true);
+		Thread downloadItems = new Thread(new DownloadItems());
+		downloadItems.start();
 	}
 	
 	private class DownloadItems implements Runnable {
@@ -119,6 +129,9 @@ public class DisplayItemsFragment extends Fragment implements OnItemClickListene
 		public void run() {
 			Toast toast = Toast.makeText(parentActivity,R.string.noManufacturersFound, Toast.LENGTH_LONG);
 			toast.show();
+			parentActivity.setContentView(R.layout.retry_button);
+			Button retryButton = (Button) parentActivity.findViewById(R.id.retry);
+			retryButton.setOnClickListener(DisplayItemsFragment.this);
 			if (progressDialog != null) {
 				progressDialog.dismiss();
 			}

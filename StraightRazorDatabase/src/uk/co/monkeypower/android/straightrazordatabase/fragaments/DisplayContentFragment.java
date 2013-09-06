@@ -21,7 +21,7 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class DisplayContentFragment extends Fragment {
+public class DisplayContentFragment extends Fragment implements OnClickListener {
 	
 	private FragmentActivity parentActivity;
 	private String content;
@@ -42,10 +42,8 @@ public class DisplayContentFragment extends Fragment {
 			content = savedInstanceState.getString("content");
 		}
 		if (content == null) {
-			String progressMessage = getResources().getString(
-					R.string.waitForContent);
-			progressDialog = ProgressDialog.show(parentActivity, "", progressMessage,
-					true);
+			String progressMessage = getResources().getString(R.string.waitForContent);
+			progressDialog = ProgressDialog.show(parentActivity, "", progressMessage,true);
 			Thread downloadContent = new Thread(new DownloadContent());
 			downloadContent.start();
 		} else {
@@ -62,6 +60,13 @@ public class DisplayContentFragment extends Fragment {
 	}
 
 
+	@Override
+	public void onClick(View v) {
+		String progressMessage = getResources().getString(R.string.waitForContent);
+		progressDialog = ProgressDialog.show(parentActivity, "", progressMessage,true);
+		Thread downloadContent = new Thread(new DownloadContent());
+		downloadContent.start();
+	}
 
 	private class DownloadContent implements Runnable {
 
@@ -130,6 +135,9 @@ public class DisplayContentFragment extends Fragment {
 		public void run() {
 			Toast toast = Toast.makeText(parentActivity,R.string.noManufacturersFound, Toast.LENGTH_LONG);
 			toast.show();
+			parentActivity.setContentView(R.layout.retry_button);
+			Button retryButton = (Button) parentActivity.findViewById(R.id.retry);
+			retryButton.setOnClickListener(DisplayContentFragment.this);
 			if (progressDialog != null) {
 				progressDialog.dismiss();
 			}

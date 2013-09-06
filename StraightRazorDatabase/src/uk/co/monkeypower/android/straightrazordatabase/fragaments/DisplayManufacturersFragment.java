@@ -19,13 +19,15 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
 @SuppressLint("NewApi")
-public class DisplayManufacturersFragment extends Fragment implements OnItemClickListener {
+public class DisplayManufacturersFragment extends Fragment implements OnClickListener, OnItemClickListener {
 	
 	private List<Manufacturer> manufacturers;
 	private ProgressDialog progressDialog;
@@ -65,6 +67,14 @@ public class DisplayManufacturersFragment extends Fragment implements OnItemClic
 		Intent intent = new Intent(parentActivity, DisplayItemsActivity.class);
 		intent.putExtra("manufacturer", manufacturer);
 		startActivity(intent);
+	}
+	
+	@Override
+	public void onClick(View v) {
+		String progressMessage = getResources().getString(R.string.waitForManufacturers);
+		progressDialog = ProgressDialog.show(parentActivity, "", progressMessage,true);
+		Thread downloadManufacturersThread = new Thread(new DownloadManufacturers());
+		downloadManufacturersThread.start();
 	}
 	
 	private class DownloadManufacturers implements Runnable {
@@ -107,6 +117,9 @@ public class DisplayManufacturersFragment extends Fragment implements OnItemClic
 		public void run() {
 			Toast toast = Toast.makeText(parentActivity,R.string.noManufacturersFound, Toast.LENGTH_LONG);
 			toast.show();
+			parentActivity.setContentView(R.layout.retry_button);
+			Button retryButton = (Button) parentActivity.findViewById(R.id.retry);
+			retryButton.setOnClickListener(DisplayManufacturersFragment.this);
 			if (progressDialog != null) {
 				progressDialog.dismiss();
 			}
