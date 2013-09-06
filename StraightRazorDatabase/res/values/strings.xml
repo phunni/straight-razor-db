@@ -4,7 +4,7 @@
     <string name="app_name">Straight Razor Database</string>
     <string name="action_settings">About</string>
     <string name="waitForManufacturers">Please wait while we download the list of razor manufacturers.</string>
-    <string name="noManufacturersFound">No data found, straightrazorplace.com may be offline.  Please try again later.</string>
+    <string name="noManufacturersFound">No data found, straightrazorplace.com may be offline, or you may have no data connection.  Please try again later.</string>
     <string name="title_activity_display_items">Razors by Manufacturer</string>
     <string name="waitForItems">Please wait while we download items from this Manufacturer.</string>
     <string name="waitForContent">Please wait while we access this content.</string>
