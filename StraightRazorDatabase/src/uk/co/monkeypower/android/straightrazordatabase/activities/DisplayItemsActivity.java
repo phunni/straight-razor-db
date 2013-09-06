@@ -19,9 +19,9 @@ public class DisplayItemsActivity extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		manufacturerTitle = ((Manufacturer) getIntent().getExtras().getParcelable("manufacturer")).getTitle();
-		getActionBar().setTitle(manufacturerTitle);
+		getSupportActionBar().setTitle(manufacturerTitle);
 		FragmentManager manager = getSupportFragmentManager();
 		if (manager.findFragmentById(android.R.id.content) == null ) {
 			Fragment manufufacturersFragment = new DisplayItemsFragment();

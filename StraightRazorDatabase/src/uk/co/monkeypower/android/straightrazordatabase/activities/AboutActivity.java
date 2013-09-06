@@ -11,7 +11,7 @@ public class AboutActivity extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		setContentView(R.layout.about);
 		TextView aboutText = (TextView) findViewById(R.id.aboutText);
 		Linkify.addLinks(aboutText, Linkify.WEB_URLS);
