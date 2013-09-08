@@ -11,6 +11,19 @@
 #   http://developer.android.com/guide/developing/tools/proguard.html
 
 # Add any project specific keep options here:
+-dontskipnonpubliclibraryclassmembers
+
+-dontwarn android.media.*
+-dontwarn android.view.*
+-dontwarn org.apache.tools.ant.* 
+-dontwarn android.hardware.display.*
+-dontwarn android.view.accessibility.*
+-dontwarn android.accessibilityservice.*
+-dontwarn org.jdom2.*
+
+-keep class * implements android.os.Parcelable {
+  public static final android.os.Parcelable$Creator *;
+}
 
 # If your project uses WebView with JS, uncomment the following
 # and specify the fully qualified class name to the JavaScript interface
