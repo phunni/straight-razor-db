@@ -109,10 +109,10 @@ public class DisplayItemsFragment extends Fragment implements OnClickListener, O
 				TextView noItemsText = (TextView) parentActivity.findViewById(R.id.noItemsText);
 				Linkify.addLinks(noItemsText, Linkify.WEB_URLS);
 			} else {
-				parentActivity.setContentView(R.layout.activity_display_items);
+				parentActivity.setContentView(R.layout.activity_straight_razor_database);
 				StraightRazorItemAdapter itemAdapter = new StraightRazorItemAdapter(parentActivity, R.layout.item_list, 
 						items);
-				ListView itemsView = (ListView) parentActivity.findViewById(R.id.allItems);
+				ListView itemsView = (ListView) parentActivity.findViewById(R.id.allManufacturers);
 				itemsView.setAdapter(itemAdapter);
 				itemsView.setOnItemClickListener(DisplayItemsFragment.this);
 			}
