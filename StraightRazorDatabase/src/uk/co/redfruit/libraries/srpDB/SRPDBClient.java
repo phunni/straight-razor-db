@@ -3,6 +3,7 @@ package uk.co.redfruit.libraries.srpDB;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -80,7 +81,7 @@ public class SRPDBClient {
 		} catch (JSONException e) {
 			throw new SRBClientException("Failed to get or parse JSON", e);
 		}
-
+		Collections.sort(manufacturers);
 		return manufacturers;
 	}
 
