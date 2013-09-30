@@ -8,7 +8,7 @@ import android.os.Parcelable;
  * Date: 01/07/13
  * Time: 19:06
  */
-public class Manufacturer implements Parcelable {
+public class Manufacturer implements Parcelable, Comparable<Manufacturer> {
 
     private int pageID;
     private String title;
@@ -61,4 +61,13 @@ public class Manufacturer implements Parcelable {
 			return manufacturer;
 		}
 	};
+
+	@Override
+	public int compareTo(Manufacturer another) {
+		if (this.equals(another)) {
+			return 0;
+		} 
+		String title = another.getTitle();
+		return this.title.compareToIgnoreCase(title);
+	}
 }
