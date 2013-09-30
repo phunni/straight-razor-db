@@ -104,6 +104,7 @@ public class DisplayManufacturersFragment extends Fragment implements OnClickLis
 			ListView manufacturersView = (ListView) parentActivity.findViewById(R.id.allManufacturers);
 			manufacturersView.setAdapter(itemAdapter);
 			manufacturersView.setOnItemClickListener(DisplayManufacturersFragment.this);
+			manufacturersView.setFastScrollEnabled(true);
 			if (progressDialog != null) {
 				progressDialog.dismiss();
 			}
