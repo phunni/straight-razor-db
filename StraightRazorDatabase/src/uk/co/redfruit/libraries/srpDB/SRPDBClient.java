@@ -25,7 +25,7 @@ public class SRPDBClient {
 	private final static String MANUFACTURER_URL = "http://straightrazorplace.com/srpwiki/api.php?action=query&list=categorymembers&cmtitle=Category:Manufacturers&cmlimit=500&format=json";
 	private final static String CONTENT_URL = "http://straightrazorplace.com/srpwiki/index.php?curid=****&action=render";
 	//the user agent is required as a workaround since the server returns a 403 to whatever the default is.
-	private final static String USER_AGENT = "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.2 Safari/537.36";
+	private final static String USER_AGENT = "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.2 Safari/537.36";  
 
 	public List<Manufacturer> getManufacturers() throws SRBClientException {
 		return getManufacturersFromJSON(MANUFACTURER_URL);
@@ -60,6 +60,8 @@ public class SRPDBClient {
 		}
 		AndroidHttpClient httpClient = new AndroidHttpClient();
 		httpClient.addHeader("User-Agent", USER_AGENT);
+		httpClient.addHeader("Accept", "text/html,application/xml,application/json;q=1.0");
+		httpClient.setConnectionTimeout(5000);
 		HttpResponse response = httpClient.get(targetURL, null);
 		if (response == null ) {
 			throw new SRBClientException("Failed to get any data back, data may not be available!");
@@ -89,6 +91,8 @@ public class SRPDBClient {
 		String contentURL = CONTENT_URL.replace("****", "" + pageID);
 		AndroidHttpClient httpClient = new AndroidHttpClient();
 		httpClient.addHeader("User-Agent", USER_AGENT);
+		httpClient.addHeader("Accept", "text/html,application/xml,application/json;q=1.0");
+		httpClient.setConnectionTimeout(5000);
 		HttpResponse response = httpClient.get(contentURL, null);
 		if (response == null ) {
 			throw new SRBClientException("Failed to get any data back, data may not be available!");
