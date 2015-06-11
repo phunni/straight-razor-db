@@ -1,0 +1,33 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 16
+    buildToolsVersion "23.0.0 rc2"
+
+    defaultConfig {
+        applicationId "uk.co.monkeypower.android.straightrazordatabase"
+        minSdkVersion 8
+        targetSdkVersion 18
+
+        testApplicationId "uk.co.monkeypower.android.straightrazordatabase.test"
+        testInstrumentationRunner "android.test.InstrumentationTestRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+}
+
+dependencies {
+    compile 'com.android.support:appcompat-v7:19.1.0'
+    compile files('libs/basic-http-client-android-0.88.jar')
+    compile files('libs/htmlcleaner-2.6.jar')
+    testCompile 'junit:junit:4.12'
+}

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/home/paul/dev/android/straight-razor-db/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/res/values-it/values.xml -->
+    <eat-comment/>
+    <string msgid="4600421777120114993" name="abc_action_bar_home_description">"Vai alla home page"</string>
+    <string msgid="1594238315039666878" name="abc_action_bar_up_description">"Vai in alto"</string>
+    <string msgid="3588849162933574182" name="abc_action_menu_overflow_description">"Altre opzioni"</string>
+    <string msgid="4076576682505996667" name="abc_action_mode_done">"Fine"</string>
+    <string msgid="7468859129482906941" name="abc_activity_chooser_view_see_all">"Visualizza tutte"</string>
+    <string msgid="2031811694353399454" name="abc_activitychooserview_choose_application">"Scegli un\'applicazione"</string>
+    <string msgid="3691816814315814921" name="abc_searchview_description_clear">"Cancella query"</string>
+    <string msgid="2550479030709304392" name="abc_searchview_description_query">"Query di ricerca"</string>
+    <string msgid="8264924765203268293" name="abc_searchview_description_search">"Cerca"</string>
+    <string msgid="8928215447528550784" name="abc_searchview_description_submit">"Invia query"</string>
+    <string msgid="893419373245838918" name="abc_searchview_description_voice">"Ricerca vocale"</string>
+    <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"Condividi con"</string>
+    <string msgid="7165123711973476752" name="abc_shareactionprovider_share_with_application">"Condividi con %s"</string>
+    <!-- From: file:/home/paul/dev/android/straight-razor-db/app/src/main/res/values-it/strings.xml -->
+    <eat-comment/>
+    <string name="about">Questa app è stata sviluppata da Redfruit (Paul Hunnisett). Tutti i contenuti dello Straight Razor Database
+	    sono ottenuti da http://www.straightrazorplace.com/ e i diritti di uso e di proprietà appartengono a http://www.straightrazorplace.com o ai singoli autori. L\'icona della app è stata creata da Michael Cramer. I contenuti sono
+	    utilizzati con il permesso dei proprietari. Traduzione in Italiano di Antonello \"razorguy\" Biancalana.</string>
+    <string name="action_settings">Informazioni</string>
+    <string name="app_name">Straight Razor Database</string>
+    <string name="browserButton">Apri nel tuo Browser</string>
+    <string name="noManufacturersFound">Nessun dato ricevuto. straightrazorplace.com potrebbe essere inattivo oppure non hai una connessione internet disponibile. Si prega di riprovare più tardi.</string>
+    <string name="no_items">Non è stato possibile caricare le informazioni di questo elemento dallo Straight Razor Database. Se ritieni che questo non sia possibile,
+	    si prega di visitare http://www.straightrazorplace.com/ e contattare il supporto. In alternativa, puoi anche personalmente aggiungere o modificare le informazioni mancanti nel wiki del sito!</string>
+    <string name="retry">Riprova</string>
+    <string name="title_about">Informazioni</string>
+    <string name="title_activity_display_content">DisplayContentActivity</string>
+    <string name="title_activity_display_items">Rasoi per Produttore</string>
+    <string name="title_activity_straight_razor_database">Produttori di ML</string>
+    <string name="waitForContent">Caricamento della pagina. Attendere prego.</string>
+    <string name="waitForItems">Caricamento delle informazioni di questo Produttore. Attendere prego.</string>
+    <string name="waitForManufacturers">Attendere prego. Caricamento dell\'elenco dei produttori di rasoi.</string>
+</resources>
